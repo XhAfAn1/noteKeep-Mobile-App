@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notekeep/views/single_note.dart';
 
 class home_screen extends StatelessWidget {
   const home_screen({super.key});
@@ -57,7 +58,12 @@ class home_screen extends StatelessWidget {
             backgroundColor: Colors.white,
             onPressed: () {},
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+              //  Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context)=> const create_note(),
+                ));
+              },
               child: Image.asset('assets/add_logo.PNG'),
             )),
       ),
