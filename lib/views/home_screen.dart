@@ -1,26 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:notekeep/notes%20and%20datas/note.dart';
 import 'package:notekeep/views/single_note.dart';
 
 bool singleGrid = false;
-List<Map> notes = [
-  {
-    'title': 'note1',
-    'description': 'This is depscription for note 1',
-  },
-  {
-    'title': 'note2',
-    'description': 'This is depscription for note 2',
-  },
-  {
-    'title': 'note3',
-    'description':
-        'This is depscription for note 3\nThis is depscription for note 3\nThis is depscription for note 3',
-  },
-  {
-    'title': 'note4',
-    'description': '',
-  },
+List<note> noteobj = [
+  note(
+    title: 'note1',
+    description: 'This is depscription for note 1',
+  ),
+  note(title: 'note2', description: 'This is depscription for note 2'),
+  note(
+      title: 'note3',
+      description:
+          'This is depscription for note 3\nThis is depscription for note 3\nThis is depscription for note 3'),
+  note(title: 'note4'),
+  note(
+      description:
+          'This is depscription for note 5 This is depscription for note 5 This is depscription for note 5'),
+  note(
+    title: 'note1',
+    description: 'This is depscription for note 1',
+  ),
+  note(title: 'note2', description: 'This is depscription for note 2'),
+  note(
+      title: 'note3',
+      description:
+          'This is depscription for note 3\nThis is depscription for note 3\nThis is depscription for note 3'),
+  note(title: 'note4'),
+  note(
+      description:
+          'This is depscription for note 5 This is depscription for note 5 This is depscription for note 5'),
+  note(
+    title: 'note1',
+    description: 'This is depscription for note 1',
+  ),
+  note(title: 'note2', description: 'This is depscription for note 2'),
+  note(
+      title: 'note3',
+      description:
+          'This is depscription for note 3\nThis is depscription for note 3\nThis is depscription for note 3'),
+  note(title: 'note4'),
+  note(
+      description:
+          'This is depscription for note 5 This is depscription for note 5 This is depscription for note 5'),
 ];
 
 class home_screen extends StatefulWidget {
@@ -77,6 +100,241 @@ class _home_screenState extends State<home_screen> {
               ),
             ],
           )),
+      drawer: Drawer(
+        shape: const LinearBorder(),
+        width: 350,
+        backgroundColor: Colors.white,
+        child: ListView(
+          children: [
+            const SizedBox(
+              height: 20,
+            ),
+            ListTile(
+              leading: Image.asset('assets/appstore.png'),
+              title: const Text(
+                'Note Keep',
+                style: TextStyle(
+                    fontSize: 25,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.w500),
+              ),
+              onTap: null,
+            ),
+            const Divider(
+              height: 10,
+            ),
+          const SizedBox(
+            height: 5,
+          ),
+          Container(
+            padding: const EdgeInsets.only(left: 5),
+            margin: const EdgeInsets.only(right: 15),
+            decoration: const BoxDecoration(
+              color: Color(0XFFE8F0FE),
+              borderRadius: BorderRadius.only(topRight: Radius.circular(30),bottomRight: Radius.circular(30))
+            ),
+            child: const ListTile(
+              leading: Icon(
+                color: Color(0XFF3C88EC),
+                Icons.lightbulb_outline,
+                size: 23,
+              ),
+              title: Text(
+                'Notes',
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Color(0XFF3C88EC),
+                    fontWeight: FontWeight.bold),
+              ),
+              onTap: null,
+            ),
+          ),
+            Container(
+              padding: const EdgeInsets.only(left: 5),
+              margin: const EdgeInsets.only(right: 15),
+
+              child: ListTile(
+                leading: Icon(
+                  color: Colors.black.withOpacity(0.75),
+                  Icons.notifications_none_outlined,
+                  size: 23,
+                ),
+                title: Text(
+                  'Reminders',
+                  style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.black.withOpacity(0.75),
+                      fontWeight: FontWeight.bold),
+                ),
+                onTap: null,
+              ),
+            ),
+            const Divider(
+              height: 10,
+              indent: 60,
+            ),
+            Container(
+              padding: const EdgeInsets.only(left: 5),
+              margin: const EdgeInsets.only(left: 17,top: 20,bottom: 20),
+              child: Text("LABELS",
+                  style: TextStyle(
+                  fontSize: 15,
+                      color: Colors.black.withOpacity(0.75),
+                  fontWeight: FontWeight.w500),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.only(left: 5),
+              margin: const EdgeInsets.only(right: 15),
+
+              child: ListTile(
+                leading: Icon(
+                  Icons.label_outline,
+                  color: Colors.black.withOpacity(0.75),
+                  size: 23,
+                ),
+                title: Text(
+                  'Assignment',
+                  style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.black.withOpacity(0.75),
+                      fontWeight: FontWeight.bold),
+                ),
+                onTap: null,
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.only(left: 5),
+              margin: const EdgeInsets.only(right: 15),
+
+              child: ListTile(
+                leading: Icon(
+                  Icons.mode_edit_outline_outlined,
+                  color: Colors.black.withOpacity(0.75),
+                  size: 23,
+                ),
+                title: Text(
+                  'Create/Edit labels',
+                  style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.black.withOpacity(0.75),
+                      fontWeight: FontWeight.bold),
+                ),
+                onTap: null,
+              ),
+            ),
+            const Divider(
+              height: 10,
+              indent: 60,
+            ),
+            Container(
+              padding:const EdgeInsets.only(left: 5),
+              margin:const EdgeInsets.only(right: 15),
+
+              child: ListTile(
+                leading: Icon(
+                  Icons.archive_outlined,
+                  color: Colors.black.withOpacity(0.75),
+                  size: 23,
+                ),
+                title: Text(
+                  'Archive',
+                  style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.black.withOpacity(0.75),
+                      fontWeight: FontWeight.bold),
+                ),
+                onTap: null,
+              ),
+            ),
+            Container(
+              padding:const EdgeInsets.only(left: 5),
+              margin:const EdgeInsets.only(right: 15),
+
+              child: ListTile(
+                leading: Icon(
+                  Icons.delete_outline,
+                  color: Colors.black.withOpacity(0.75),
+                  size: 23,
+                ),
+                title: Text(
+                  'Bin',
+                  style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.black.withOpacity(0.75),
+                      fontWeight: FontWeight.bold),
+                ),
+                onTap: null,
+              ),
+            ),
+            const Divider(
+              height: 10,
+              indent: 60,
+            ),
+            Container(
+              padding:const EdgeInsets.only(left: 5),
+              margin:const EdgeInsets.only(right: 15),
+
+              child: ListTile(
+                leading: Icon(
+                  Icons.settings,
+                  color: Colors.black.withOpacity(0.75),
+                  size: 23,
+                ),
+                title: Text(
+                  'Setting',
+                  style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.black.withOpacity(0.75),
+                      fontWeight: FontWeight.bold),
+                ),
+                onTap: null,
+              ),
+            ),
+            Container(
+              padding:const EdgeInsets.only(left: 5),
+              margin:const EdgeInsets.only(right: 15),
+
+              child: ListTile(
+                leading: Icon(
+                  Icons.feedback_outlined,
+                  color: Colors.black.withOpacity(0.75),
+                  size: 23,
+                ),
+                title: Text(
+                  'Send app feedback',
+                  style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.black.withOpacity(0.75),
+                      fontWeight: FontWeight.bold),
+                ),
+                onTap: null,
+              ),
+            ),
+            Container(
+              padding:const EdgeInsets.only(left: 5),
+              margin:const EdgeInsets.only(right: 15),
+
+              child: ListTile(
+                leading: Icon(
+                  Icons.help_outline,
+                  color: Colors.black.withOpacity(0.75),
+                  size: 23,
+                ),
+                title: Text(
+                  'Help',
+                  style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.black.withOpacity(0.75),
+                      fontWeight: FontWeight.bold),
+                ),
+                onTap: null,
+              ),
+            ),
+
+          ],
+        ),
+      ),
       floatingActionButton: Padding(
         padding: const EdgeInsets.all(2.0),
         child: FloatingActionButton(
@@ -119,13 +377,20 @@ class _home_screenState extends State<home_screen> {
               children: [
                 Row(
                   children: [
-                    IconButton(
-                        color: const Color(0XFF676B70),
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.menu,
-                          size: 25,
-                        )),
+                    Builder(
+                      builder: (context) {
+                        return IconButton(
+                          icon: const Icon(
+                            Icons.menu,
+                            color: Color(0XFF676B70),
+                            size: 25,
+                          ),
+                          onPressed: () {
+                            Scaffold.of(context).openDrawer();
+                          },
+                        );
+                      },
+                    ),
                     const SizedBox(
                       width: 170,
                       child: TextField(
@@ -151,10 +416,15 @@ class _home_screenState extends State<home_screen> {
                             singleGrid = !singleGrid;
                           });
                         },
-                        icon: const Icon(
-                          Icons.view_agenda_outlined,
-                          size: 25,
-                        )),
+                        icon: singleGrid
+                            ? const Icon(
+                                Icons.grid_view_outlined,
+                                size: 25,
+                              )
+                            : const Icon(
+                                Icons.view_agenda_outlined,
+                                size: 25,
+                              )),
                     const CircleAvatar(
                       backgroundImage: AssetImage('assets/user.png'),
                       maxRadius: 18,
@@ -166,42 +436,51 @@ class _home_screenState extends State<home_screen> {
           ),
           Expanded(
             child: MasonryGridView.builder(
-                itemCount: notes.length,
+                crossAxisSpacing: 0,
+                padding: const EdgeInsets.all(5),
+                itemCount: noteobj.length,
                 gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: singleGrid ? 1 : 2,
-                  //childAspectRatio: 0.9,
-                  //crossAxisSpacing: 10,
-                  // mainAxisSpacing: 10,
                 ),
                 itemBuilder: (context, index) {
-                  final data = notes[index];
+                  final data = noteobj[index];
                   return Container(
                     padding: const EdgeInsets.all(10),
-                    margin: const EdgeInsets.all(10),
+                    margin: const EdgeInsets.all(5),
                     //   color: Colors.red,
                     decoration: BoxDecoration(
                       border: Border.all(
-                          width: 1, color: Colors.grey.withOpacity(0.8)),
-                      borderRadius: BorderRadius.circular(12),
+                          width: 1.1, color: Colors.grey.withOpacity(0.5)),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          data['title'],
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black.withOpacity(0.7)),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Text(data['description'] ,
-                            style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black.withOpacity(0.5))),
+                        data.title != null
+                            ? Text(
+                                data.title,
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black.withOpacity(0.7)),
+                              )
+                            : const SizedBox(
+                                height: 5,
+                              ),
+                        data.description != null
+                            ? const SizedBox(
+                                height: 10,
+                              )
+                            : const SizedBox(),
+                        data.description != null
+                            ? Text(data.description,
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black.withOpacity(0.5)))
+                            :const SizedBox(
+                                height: 0,
+                              )
                       ],
                     ),
                   );
