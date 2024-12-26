@@ -1,9 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:notekeep/views/single_note.dart';
 
-class home_screen extends StatelessWidget {
+bool singleGrid = false;
+List<Map> notes = [
+  {
+    'title': 'note1',
+    'description': 'This is depscription for note 1',
+  },
+  {
+    'title': 'note2',
+    'description': 'This is depscription for note 2',
+  },
+  {
+    'title': 'note3',
+    'description':
+        'This is depscription for note 3\nThis is depscription for note 3\nThis is depscription for note 3',
+  },
+  {
+    'title': 'note4',
+    'description': '',
+  },
+];
+
+class home_screen extends StatefulWidget {
   const home_screen({super.key});
 
+  @override
+  State<home_screen> createState() => _home_screenState();
+}
+
+class _home_screenState extends State<home_screen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,9 +86,9 @@ class home_screen extends StatelessWidget {
             onPressed: () {},
             child: TextButton(
               onPressed: () {
-              //  Navigator.of(context).pop();
+                //  Navigator.of(context).pop();
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context)=> const create_note(),
+                  builder: (context) => const create_note(),
                 ));
               },
               child: Image.asset('assets/add_logo.PNG'),
@@ -119,7 +146,11 @@ class home_screen extends StatelessWidget {
                   children: [
                     IconButton(
                         color: const Color(0XFF676B70),
-                        onPressed: () {},
+                        onPressed: () {
+                          setState(() {
+                            singleGrid = !singleGrid;
+                          });
+                        },
                         icon: const Icon(
                           Icons.view_agenda_outlined,
                           size: 25,
@@ -133,7 +164,49 @@ class home_screen extends StatelessWidget {
               ],
             ),
           ),
-          const Center(child: Text("home"))
+          Expanded(
+            child: MasonryGridView.builder(
+                itemCount: notes.length,
+                gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: singleGrid ? 1 : 2,
+                  //childAspectRatio: 0.9,
+                  //crossAxisSpacing: 10,
+                  // mainAxisSpacing: 10,
+                ),
+                itemBuilder: (context, index) {
+                  final data = notes[index];
+                  return Container(
+                    padding: const EdgeInsets.all(10),
+                    margin: const EdgeInsets.all(10),
+                    //   color: Colors.red,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          width: 1, color: Colors.grey.withOpacity(0.8)),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          data['title'],
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.black.withOpacity(0.7)),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text(data['description'] ,
+                            style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black.withOpacity(0.5))),
+                      ],
+                    ),
+                  );
+                }),
+          ),
         ],
       ),
     );
