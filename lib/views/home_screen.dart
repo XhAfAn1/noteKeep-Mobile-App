@@ -1,51 +1,10 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:notekeep/notes%20and%20datas/note.dart';
+import 'package:notekeep/notes%20and%20datas/noteDatas.dart';
 import 'package:notekeep/views/single_note.dart';
 
 bool singleGrid = false;
-List<note> noteobj = [
-  note(
-    title: 'note1',
-    description: 'This is depscription for note 1',
-  ),
-  note(title: 'note2', description: 'This is depscription for note 2'),
-  note(
-      title: 'note3',
-      description:
-          'This is depscription for note 3\nThis is depscription for note 3\nThis is depscription for note 3'),
-  note(title: 'note4'),
-  note(
-      description:
-          'This is depscription for note 5 This is depscription for note 5 This is depscription for note 5'),
-  note(
-    title: 'note1',
-    description: 'This is depscription for note 1',
-  ),
-  note(title: 'note2', description: 'This is depscription for note 2'),
-  note(
-      title: 'note3',
-      description:
-          'This is depscription for note 3\nThis is depscription for note 3\nThis is depscription for note 3'),
-  note(title: 'note4'),
-  note(
-      description:
-          'This is depscription for note 5 This is depscription for note 5 This is depscription for note 5'),
-  note(
-    title: 'note1',
-    description: 'This is depscription for note 1',
-  ),
-  note(title: 'note2', description: 'This is depscription for note 2'),
-  note(
-      title: 'note3',
-      description:
-          'This is depscription for note 3\nThis is depscription for note 3\nThis is depscription for note 3'),
-  note(title: 'note4'),
-  note(
-      description:
-          'This is depscription for note 5 This is depscription for note 5 This is depscription for note 5'),
-];
-
 class home_screen extends StatefulWidget {
   const home_screen({super.key});
 
@@ -54,6 +13,11 @@ class home_screen extends StatefulWidget {
 }
 
 class _home_screenState extends State<home_screen> {
+  @override
+  @override
+  void initState() {
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +35,6 @@ class _home_screenState extends State<home_screen> {
               IconButton(
                 icon: const Icon(
                   Icons.check_box_outlined,
-                  color: Color(0XFF676B70),
                   size: 25,
                 ),
                 onPressed: () {},
@@ -123,36 +86,36 @@ class _home_screenState extends State<home_screen> {
             const Divider(
               height: 10,
             ),
-          const SizedBox(
-            height: 5,
-          ),
-          Container(
-            padding: const EdgeInsets.only(left: 5),
-            margin: const EdgeInsets.only(right: 15),
-            decoration: const BoxDecoration(
-              color: Color(0XFFE8F0FE),
-              borderRadius: BorderRadius.only(topRight: Radius.circular(30),bottomRight: Radius.circular(30))
+            const SizedBox(
+              height: 5,
             ),
-            child: const ListTile(
-              leading: Icon(
-                color: Color(0XFF3C88EC),
-                Icons.lightbulb_outline,
-                size: 23,
-              ),
-              title: Text(
-                'Notes',
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Color(0XFF3C88EC),
-                    fontWeight: FontWeight.bold),
-              ),
-              onTap: null,
-            ),
-          ),
             Container(
               padding: const EdgeInsets.only(left: 5),
               margin: const EdgeInsets.only(right: 15),
-
+              decoration: const BoxDecoration(
+                  color: Color(0XFFE8F0FE),
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(30),
+                      bottomRight: Radius.circular(30))),
+              child: const ListTile(
+                leading: Icon(
+                  color: Color(0XFF3C88EC),
+                  Icons.lightbulb_outline,
+                  size: 23,
+                ),
+                title: Text(
+                  'Notes',
+                  style: TextStyle(
+                      fontSize: 15,
+                      color: Color(0XFF3C88EC),
+                      fontWeight: FontWeight.bold),
+                ),
+                onTap: null,
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.only(left: 5),
+              margin: const EdgeInsets.only(right: 15),
               child: ListTile(
                 leading: Icon(
                   color: Colors.black.withOpacity(0.75),
@@ -175,18 +138,18 @@ class _home_screenState extends State<home_screen> {
             ),
             Container(
               padding: const EdgeInsets.only(left: 5),
-              margin: const EdgeInsets.only(left: 17,top: 20,bottom: 20),
-              child: Text("LABELS",
-                  style: TextStyle(
-                  fontSize: 15,
-                      color: Colors.black.withOpacity(0.75),
-                  fontWeight: FontWeight.w500),
+              margin: const EdgeInsets.only(left: 17, top: 20, bottom: 20),
+              child: Text(
+                "LABELS",
+                style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.black.withOpacity(0.75),
+                    fontWeight: FontWeight.w500),
               ),
             ),
             Container(
               padding: const EdgeInsets.only(left: 5),
               margin: const EdgeInsets.only(right: 15),
-
               child: ListTile(
                 leading: Icon(
                   Icons.label_outline,
@@ -206,7 +169,6 @@ class _home_screenState extends State<home_screen> {
             Container(
               padding: const EdgeInsets.only(left: 5),
               margin: const EdgeInsets.only(right: 15),
-
               child: ListTile(
                 leading: Icon(
                   Icons.mode_edit_outline_outlined,
@@ -228,9 +190,8 @@ class _home_screenState extends State<home_screen> {
               indent: 60,
             ),
             Container(
-              padding:const EdgeInsets.only(left: 5),
-              margin:const EdgeInsets.only(right: 15),
-
+              padding: const EdgeInsets.only(left: 5),
+              margin: const EdgeInsets.only(right: 15),
               child: ListTile(
                 leading: Icon(
                   Icons.archive_outlined,
@@ -248,9 +209,8 @@ class _home_screenState extends State<home_screen> {
               ),
             ),
             Container(
-              padding:const EdgeInsets.only(left: 5),
-              margin:const EdgeInsets.only(right: 15),
-
+              padding: const EdgeInsets.only(left: 5),
+              margin: const EdgeInsets.only(right: 15),
               child: ListTile(
                 leading: Icon(
                   Icons.delete_outline,
@@ -272,9 +232,8 @@ class _home_screenState extends State<home_screen> {
               indent: 60,
             ),
             Container(
-              padding:const EdgeInsets.only(left: 5),
-              margin:const EdgeInsets.only(right: 15),
-
+              padding: const EdgeInsets.only(left: 5),
+              margin: const EdgeInsets.only(right: 15),
               child: ListTile(
                 leading: Icon(
                   Icons.settings,
@@ -292,9 +251,8 @@ class _home_screenState extends State<home_screen> {
               ),
             ),
             Container(
-              padding:const EdgeInsets.only(left: 5),
-              margin:const EdgeInsets.only(right: 15),
-
+              padding: const EdgeInsets.only(left: 5),
+              margin: const EdgeInsets.only(right: 15),
               child: ListTile(
                 leading: Icon(
                   Icons.feedback_outlined,
@@ -312,9 +270,8 @@ class _home_screenState extends State<home_screen> {
               ),
             ),
             Container(
-              padding:const EdgeInsets.only(left: 5),
-              margin:const EdgeInsets.only(right: 15),
-
+              padding: const EdgeInsets.only(left: 5),
+              margin: const EdgeInsets.only(right: 15),
               child: ListTile(
                 leading: Icon(
                   Icons.help_outline,
@@ -331,7 +288,6 @@ class _home_screenState extends State<home_screen> {
                 onTap: null,
               ),
             ),
-
           ],
         ),
       ),
@@ -346,7 +302,7 @@ class _home_screenState extends State<home_screen> {
               onPressed: () {
                 //  Navigator.of(context).pop();
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const create_note(),
+                  builder: (context) => const create_note("","",-1),
                 ));
               },
               child: Image.asset('assets/add_logo.PNG'),
@@ -435,56 +391,93 @@ class _home_screenState extends State<home_screen> {
             ),
           ),
           Expanded(
-            child: MasonryGridView.builder(
-                crossAxisSpacing: 0,
-                padding: const EdgeInsets.all(5),
-                itemCount: noteobj.length,
-                gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: singleGrid ? 1 : 2,
-                ),
-                itemBuilder: (context, index) {
-                  final data = noteobj[index];
-                  return Container(
-                    padding: const EdgeInsets.all(10),
-                    margin: const EdgeInsets.all(5),
-                    //   color: Colors.red,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                          width: 1.1, color: Colors.grey.withOpacity(0.5)),
-                      borderRadius: BorderRadius.circular(10),
+            child: (noteobj.isEmpty)
+                ? Container(
+                    margin: const EdgeInsets.all(20),
+                    child: const Text(
+                      "No Notes",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Color(0XFF676B70),
+                      ),
+                    ))
+                : MasonryGridView.builder(
+                    dragStartBehavior: DragStartBehavior.start,
+                    crossAxisSpacing: 0,
+                    padding: const EdgeInsets.all(5),
+                    itemCount: noteobj.length,
+                    gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: singleGrid ? 1 : 2,
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        data.title != null
-                            ? Text(
-                                data.title,
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black.withOpacity(0.7)),
+                    itemBuilder: (context, index) {
+                      final data = noteobj[index];
+                      return InkWell(
+                        onLongPress: (){
+                          showDialog(context: context, builder: (context)=>AlertDialog(
+                            actions: [
+                              TextButton(onPressed: (){
+                                  noteobj.removeAt(index);
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => const home_screen(),
+                                  ));
+                              }, child: const Text("Delete"))
+                            ],
+                          ));
+
+
+
+
+                        },
+                        onTap: (){
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => create_note(data.title,data.description,index),
+                          ));
+                        },
+                        child: Container(
+                          //height: ,
+                          padding: const EdgeInsets.all(10),
+                          margin: const EdgeInsets.all(5),
+                          //   color: Colors.red,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                width: 1.1, color: Colors.grey.withOpacity(0.5)),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              data.title != null
+                                  ? Text(
+                                      data.title,
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.black.withOpacity(0.7)),
+                                    )
+                                  : const SizedBox(
+                                      height: 5,
+                                    ),
+                              data.description != null
+                                  ? const SizedBox(
+                                      height: 10,
+                                    )
+                                  : const SizedBox(),
+                              data.description != null
+                                  ? Text(data.description,
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.black.withOpacity(0.5)),
+                              maxLines: 8,overflow: TextOverflow.ellipsis,
                               )
-                            : const SizedBox(
-                                height: 5,
-                              ),
-                        data.description != null
-                            ? const SizedBox(
-                                height: 10,
-                              )
-                            : const SizedBox(),
-                        data.description != null
-                            ? Text(data.description,
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black.withOpacity(0.5)))
-                            :const SizedBox(
-                                height: 0,
-                              )
-                      ],
-                    ),
-                  );
-                }),
+                                  : const SizedBox(
+                                      height: 0,
+                                    )
+                            ],
+                          ),
+                        ),
+                      );
+                    }),
           ),
         ],
       ),
