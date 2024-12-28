@@ -415,17 +415,16 @@ class _home_screenState extends State<home_screen> {
                         onLongPress: (){
                           showDialog(context: context, builder: (context)=>AlertDialog(
                             actions: [
+                              Text("Delete this note?"),
                               TextButton(onPressed: (){
+                                setState(() {
                                   noteobj.removeAt(index);
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => const home_screen(),
-                                  ));
+                                });
+                                Navigator.pop(context);
+
                               }, child: const Text("Delete"))
                             ],
                           ));
-
-
-
 
                         },
                         onTap: (){
