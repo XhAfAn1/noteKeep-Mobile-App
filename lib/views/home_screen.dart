@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:notekeep/notes%20and%20datas/noteDatas.dart';
+import 'package:notekeep/views/profile.dart';
 import 'package:notekeep/views/single_note.dart';
 
 bool singleGrid = false;
@@ -381,9 +382,16 @@ class _home_screenState extends State<home_screen> {
                                 Icons.view_agenda_outlined,
                                 size: 25,
                               )),
-                    const CircleAvatar(
-                      backgroundImage: AssetImage('assets/user.png'),
-                      maxRadius: 18,
+                    InkWell(
+                      onTap: (){
+                        print("Hello");
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>const profile()
+                        ));
+                      },
+                      child: const CircleAvatar(
+                        backgroundImage: AssetImage('assets/user.png'),
+                        maxRadius: 18,
+                      ),
                     )
                   ],
                 )
@@ -415,7 +423,7 @@ class _home_screenState extends State<home_screen> {
                         onLongPress: (){
                           showDialog(context: context, builder: (context)=>AlertDialog(
                             actions: [
-                              Text("Delete this note?"),
+                              const Text("Delete this note?"),
                               TextButton(onPressed: (){
                                 setState(() {
                                   noteobj.removeAt(index);
