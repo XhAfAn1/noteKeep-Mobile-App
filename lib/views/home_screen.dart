@@ -1,9 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:notekeep/notes%20and%20datas/noteDatas.dart';
 import 'package:notekeep/views/profile.dart';
 import 'package:notekeep/views/single_note.dart';
+
+import '../notes and datas/Userinfo.dart';
 
 bool singleGrid = false;
 class home_screen extends StatefulWidget {
@@ -14,13 +18,22 @@ class home_screen extends StatefulWidget {
 }
 
 class _home_screenState extends State<home_screen> {
-  @override
+
   @override
   void initState() {
     super.initState();
   }
+   File? image;
+  bool hasImage=false;
   @override
+
   Widget build(BuildContext context) {
+    setState(() {
+      if(userInfo['hasPhoto']==true) {
+        image = userInfo['profile'];
+        hasImage=true;
+      }
+    });
     return Scaffold(
       backgroundColor: Colors.white,
       bottomNavigationBar: BottomAppBar(
@@ -382,16 +395,27 @@ class _home_screenState extends State<home_screen> {
                                 Icons.view_agenda_outlined,
                                 size: 25,
                               )),
+
+                    if (userInfo['hasPhoto'])
                     InkWell(
+                        onTap: (){
+                          print("Hello");
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>const profile()
+                          ));
+                        },
+                        child: CircleAvatar(
+                          radius: 18,
+                          backgroundImage: Image.file(image!).image,
+                        )
+                    ) else InkWell(
                       onTap: (){
-                        print("Hello");
                         Navigator.push(context, MaterialPageRoute(builder: (context)=>const profile()
                         ));
                       },
-                      child: const CircleAvatar(
-                        backgroundImage: AssetImage('assets/user.png'),
-                        maxRadius: 18,
-                      ),
+                      child: CircleAvatar(
+                        radius: 18,
+                        backgroundImage: Image.asset('assets/defaultUser.jpg').image,
+                      )
                     )
                   ],
                 )

@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:notekeep/main.dart';
 import 'package:notekeep/views/home_screen.dart';
 import 'package:notekeep/notes and datas/Userinfo.dart';
 class splash_screen extends StatefulWidget {
@@ -24,8 +23,6 @@ class _splash_screenState extends State<splash_screen> {
       if(pickedImage !=null){
         image=File(pickedImage.path);
       }
-      else
-        print("No Image");
     });
 
   }
@@ -36,111 +33,126 @@ class _splash_screenState extends State<splash_screen> {
 
 
     return Scaffold(
-      body: Container(
-        child: PageView(
+      backgroundColor: Colors.white,
+      body:  PageView(
           controller: pages,
           children: [
             Container(
-                padding: EdgeInsets.all(20),
-              color: Colors.red,
+                padding: const EdgeInsets.all(20),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                Container(
-                  width: double.infinity,
-                  height: 60,
-                  child: ElevatedButton(
-                    onPressed: (){
-                      pages.nextPage(duration: Duration(microseconds: 250), curve:Curves.bounceIn);
-                    }, child: Text("Continue"),),
-                ),
+                  const SizedBox(height: 50,),
+                  const Text("This is just a basic notepad app.\nFeatures:\n1.Create note\n2.Setup Profile\n\n\nwill design this onboarding screen later",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w500),),
+                  const SizedBox(height: 50,),
+                 Column(
+                   children: [
+                     SizedBox(
+                       width: double.infinity,
+                       height: 60,
+                       child: ElevatedButton(
+                         style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Colors.lightBlueAccent)),
+                         onPressed: (){
+                           pages.nextPage(duration: const Duration(microseconds: 800), curve:Curves.easeIn);
+                         }, child: const Text("Continue",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.black),),),
+                     ),
 
-                  SizedBox(height: 50,)
+                     const SizedBox(height: 50,)
+                   ],
+                 )
                 ],
               )
             ),
             Container(
-              padding: EdgeInsets.all(20),
-              color: Colors.green,
+              padding: const EdgeInsets.all(20),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const SizedBox(height: 50,),
-                    Container(
-                      child: Column(
-                        children: [
-                        Stack(alignment: Alignment.bottomRight,
-                        children: [
-                          if(image!=null)CircleAvatar(
-                            radius: 80,
-                            backgroundImage: Image.file(image!).image,
-                          )
-                          else CircleAvatar(
-                            radius: 80,
-                            backgroundImage: Image.asset('assets/defaultUser.jpg').image,
-                          )
-                          ,
-                          TextButton(
-                            onPressed: (){
-                              getImage();
-                            }, child: const Icon(Icons.camera_alt,color: Colors.lightBlueAccent,size: 35,),)
-                        ],
-                      ),SizedBox(height: 50,),
-                          TextField(
+                    const Text("Set up Profile",style: TextStyle(fontSize: 40,fontWeight: FontWeight.w500),),
 
-                            decoration: const InputDecoration(
-                              hintText:"Enter User name",
-                              hintStyle: TextStyle(fontSize: 20,color: Colors.white),
-                              border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
-                            ),
-                            controller: userName,
-                          )
-                        ],
-                      ),
-                    )
-                    ,
                     Column(
                       children: [
-                        Container(
+                      Stack(alignment: Alignment.bottomRight,
+                      children: [
+                        if(image!=null)CircleAvatar(
+                          radius: 80,
+                          backgroundImage: Image.file(image!).image,
+                        )
+                        else CircleAvatar(
+                          radius: 80,
+                          backgroundImage: Image.asset('assets/defaultUser.jpg').image,
+                        )
+                        ,
+                        TextButton(
+                          onPressed: (){
+                            getImage();
+                          }, child: const Icon(Icons.camera_alt,color: Colors.lightBlueAccent,size: 35,),)
+                      ],
+                    ),const SizedBox(height: 50,),
+                        TextField(
+                          style: const TextStyle(fontSize: 20,fontWeight: FontWeight.w400,),
+                          decoration: const InputDecoration(
+                            hintText:"Enter User name",
+                            hintStyle: TextStyle(fontSize: 20,color: Colors.white),
+                            border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(20))),
+                          ),
+                          controller: userName,
+                        )
+                      ],
+                    )
+                    ,const SizedBox(height: 50,),
+                    Column(
+                      children: [
+                        SizedBox(
                           width: double.infinity,
                           height: 60,
                           child: ElevatedButton(
+                            style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Colors.lightBlueAccent)),
                             onPressed: (){
-                              uerInfo['name']=userName.text;
-                              uerInfo['profile']=image;
-                              pages.nextPage(duration: Duration(microseconds: 250), curve:Curves.bounceIn);
-                            }, child: Text("Continue"),),
+                              userInfo['name']=userName.text;
+                              userInfo['profile']=image;
+                              if(image!=null) {
+                                userInfo['hasPhoto']=true;
+                              }
+
+                              pages.nextPage(duration: const Duration(microseconds: 250), curve:Curves.bounceIn);
+                            }, child: const Text("Continue",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.black),),),
                         ),
 
-                        SizedBox(height: 50,)
+                        const SizedBox(height: 50,)
                       ],
                     )
                   ],
                 )
             ),
             Container(
-              padding: EdgeInsets.all(20),
-              color: Colors.yellow,
+              padding: const EdgeInsets.all(20),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    width: double.infinity,
-                    height: 60,
-                    child: ElevatedButton(
-                      onPressed: (){
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>home_screen()));
-                      }, child: Text("Get Started"),),
-                  ),
-                  SizedBox(height: 50,)
+                  const SizedBox(height: 50,),
+                  const Text("Welcome!",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w500),),
+                  Column(
+                    children: [
+                      SizedBox(
+                        width: double.infinity,
+                        height: 60,
+                        child: ElevatedButton(
+                          style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Colors.lightBlueAccent)),
+                          onPressed: (){
+                            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>const home_screen()));
+                          }, child: const Text("Get Started",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.black),),),
+                      ),
+                      const SizedBox(height: 50,)
+                    ],
+                  )
                 ],
               ),
             ),
           ],
         ),
-      ),
+
     );
   }
 }

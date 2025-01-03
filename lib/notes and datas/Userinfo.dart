@@ -1,4 +1,5 @@
-Map uerInfo ={
+Map userInfo ={
   'name':'User',
   'profile':'',
+  'hasPhoto': false
 };

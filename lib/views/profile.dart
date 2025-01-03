@@ -27,11 +27,11 @@ Future getImage() async {
 
   setState(() {
     if(pickedImage !=null){
-      uerInfo['profile']=File(pickedImage.path);
+      userInfo['profile']=File(pickedImage.path);
+      userInfo['hasPhoto']=true;
       image=File(pickedImage.path);
     }
-    else
-      print("No Image");
+
   });
 
 }
@@ -39,16 +39,17 @@ Future getImage() async {
   @override
   Widget build(BuildContext context) {
 setState(() {
-  if(uerInfo['profile']!="")
-    image=uerInfo['profile'];
+  if(userInfo['profile']!="") {
+    image=userInfo['profile'];
+  }
 });
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: IconButton(onPressed: (){
-          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>home_screen()));
-        }, icon: Icon(Icons.arrow_back_ios_new_rounded,size: 30,),),
+          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const home_screen()));
+        }, icon:const Icon(Icons.arrow_back_ios_new_rounded,size: 30,),),
       ),
       body: Center(
         child: Column(
@@ -78,7 +79,7 @@ setState(() {
           const SizedBox(
             height: 50,
           ),
-           Text("USER NAME: ${uerInfo['name']}",style: TextStyle(fontSize: 20),)
+           Text("USER NAME: ${userInfo['name']}",style: const TextStyle(fontSize: 20),)
         ],),
       ),
     );
