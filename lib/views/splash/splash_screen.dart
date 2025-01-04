@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:notekeep/notes%20and%20datas/sharedPref/sharedPref.dart';
 import 'package:notekeep/views/home_screen.dart';
 import 'package:notekeep/notes and datas/Userinfo.dart';
 class splash_screen extends StatefulWidget {
@@ -22,9 +23,11 @@ class _splash_screenState extends State<splash_screen> {
     setState(() {
       if(pickedImage !=null){
         image=File(pickedImage.path);
+        userInfo['profile']=image;
+        userInfo['hasPhoto']=true;
+
       }
     });
-
   }
   @override
   Widget build(BuildContext context) {
@@ -43,7 +46,7 @@ class _splash_screenState extends State<splash_screen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const SizedBox(height: 50,),
-                  const Text("This is just a basic notepad app.\nFeatures:\n1.Create note\n2.Setup Profile\n\n\nwill design this onboarding screen later",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w500),),
+                  const Text("This is just a basic notepad app.\nFeatures:\n1.Create note\n2.Setup Profile\n3.long press delete note\n\n\nwill design this onboarding screen later",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w500),),
                   const SizedBox(height: 50,),
                  Column(
                    children: [
@@ -77,7 +80,7 @@ class _splash_screenState extends State<splash_screen> {
                       children: [
                         if(image!=null)CircleAvatar(
                           radius: 80,
-                          backgroundImage: Image.file(image!).image,
+                          backgroundImage: Image.file(userInfo['profile']! as File).image,
                         )
                         else CircleAvatar(
                           radius: 80,
@@ -112,9 +115,10 @@ class _splash_screenState extends State<splash_screen> {
                             onPressed: (){
                               userInfo['name']=userName.text;
                               userInfo['profile']=image;
-                              if(image!=null) {
+                              if(image!=null){
                                 userInfo['hasPhoto']=true;
                               }
+
 
                               pages.nextPage(duration: const Duration(microseconds: 250), curve:Curves.bounceIn);
                             }, child: const Text("Continue",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.black),),),
@@ -141,6 +145,8 @@ class _splash_screenState extends State<splash_screen> {
                         child: ElevatedButton(
                           style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Colors.lightBlueAccent)),
                           onPressed: (){
+                            loggedin();
+                            saveUser();
                             Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>const home_screen()));
                           }, child: const Text("Get Started",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.black),),),
                       ),

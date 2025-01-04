@@ -27,6 +27,7 @@ class create_note extends StatelessWidget {
 
             if(index!=-1) noteobj.removeAt(index);
             noteobj.add(note(title: title.text,description: noteData.text));
+
             Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => const home_screen(),
             ));

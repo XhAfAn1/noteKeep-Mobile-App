@@ -8,8 +8,10 @@ import 'package:notekeep/views/profile.dart';
 import 'package:notekeep/views/single_note.dart';
 
 import '../notes and datas/Userinfo.dart';
+import '../notes and datas/sharedPref/sharedPref.dart';
 
 bool singleGrid = false;
+
 class home_screen extends StatefulWidget {
   const home_screen({super.key});
 
@@ -18,22 +20,20 @@ class home_screen extends StatefulWidget {
 }
 
 class _home_screenState extends State<home_screen> {
-
   @override
   void initState() {
     super.initState();
+    getInstance();
+    getImage();
   }
-   File? image;
-  bool hasImage=false;
-  @override
 
+  File? image;
+  @override
   Widget build(BuildContext context) {
     setState(() {
-      if(userInfo['hasPhoto']==true) {
-        image = userInfo['profile'];
-        hasImage=true;
-      }
+      getImage();
     });
+
     return Scaffold(
       backgroundColor: Colors.white,
       bottomNavigationBar: BottomAppBar(
@@ -316,7 +316,7 @@ class _home_screenState extends State<home_screen> {
               onPressed: () {
                 //  Navigator.of(context).pop();
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const create_note("","",-1),
+                  builder: (context) => const create_note("", "", -1),
                 ));
               },
               child: Image.asset('assets/add_logo.PNG'),
@@ -395,28 +395,34 @@ class _home_screenState extends State<home_screen> {
                                 Icons.view_agenda_outlined,
                                 size: 25,
                               )),
+                    if (userInfo['hasPhoto']!=false)
+                      InkWell(
+                          onTap: () {
 
-                    if (userInfo['hasPhoto'])
-                    InkWell(
-                        onTap: (){
-                          print("Hello");
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>const profile()
-                          ));
-                        },
-                        child: CircleAvatar(
-                          radius: 18,
-                          backgroundImage: Image.file(image!).image,
-                        )
-                    ) else InkWell(
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>const profile()
-                        ));
-                      },
-                      child: CircleAvatar(
-                        radius: 18,
-                        backgroundImage: Image.asset('assets/defaultUser.jpg').image,
-                      )
-                    )
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const profile()));
+                          },
+                          child: CircleAvatar(
+                            radius: 18,
+                            backgroundImage: image != null
+                                ? Image.file(image!).image
+                                : Image.asset('assets/defaultUser.jpg').image,
+                          ))
+                    else
+                      InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const profile()));
+                          },
+                          child: CircleAvatar(
+                            radius: 18,
+                            backgroundImage:
+                                Image.asset('assets/defaultUser.jpg').image,
+                          ))
                   ],
                 )
               ],
@@ -438,30 +444,35 @@ class _home_screenState extends State<home_screen> {
                     crossAxisSpacing: 0,
                     padding: const EdgeInsets.all(5),
                     itemCount: noteobj.length,
-                    gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate:
+                        SliverSimpleGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: singleGrid ? 1 : 2,
                     ),
                     itemBuilder: (context, index) {
+                      index = noteobj.length - index - 1;
                       final data = noteobj[index];
                       return InkWell(
-                        onLongPress: (){
-                          showDialog(context: context, builder: (context)=>AlertDialog(
-                            actions: [
-                              const Text("Delete this note?"),
-                              TextButton(onPressed: (){
-                                setState(() {
-                                  noteobj.removeAt(index);
-                                });
-                                Navigator.pop(context);
-
-                              }, child: const Text("Delete"))
-                            ],
-                          ));
-
+                        onLongPress: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                    actions: [
+                                      const Text("Delete this note?"),
+                                      TextButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              noteobj.removeAt(index);
+                                            });
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text("Delete"))
+                                    ],
+                                  ));
                         },
-                        onTap: (){
+                        onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => create_note(data.title,data.description,index),
+                            builder: (context) => create_note(
+                                data.title, data.description, index),
                           ));
                         },
                         child: Container(
@@ -471,7 +482,8 @@ class _home_screenState extends State<home_screen> {
                           //   color: Colors.red,
                           decoration: BoxDecoration(
                             border: Border.all(
-                                width: 1.1, color: Colors.grey.withOpacity(0.5)),
+                                width: 1.1,
+                                color: Colors.grey.withOpacity(0.5)),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Column(
@@ -494,13 +506,15 @@ class _home_screenState extends State<home_screen> {
                                     )
                                   : const SizedBox(),
                               data.description != null
-                                  ? Text(data.description,
+                                  ? Text(
+                                      data.description,
                                       style: TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,
                                           color: Colors.black.withOpacity(0.5)),
-                              maxLines: 8,overflow: TextOverflow.ellipsis,
-                              )
+                                      maxLines: 8,
+                                      overflow: TextOverflow.ellipsis,
+                                    )
                                   : const SizedBox(
                                       height: 0,
                                     )
@@ -513,5 +527,10 @@ class _home_screenState extends State<home_screen> {
         ],
       ),
     );
+  }
+
+  Future<void> getImage() async {
+    image = await userInfo['profile'];
+    setState(() {}); // Ensure UI updates after the value is set.
   }
 }
