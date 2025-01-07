@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notekeep/MainWheretoGo.dart';
 import 'package:notekeep/views/home_screen.dart';
+import 'package:notekeep/views/profile.dart';
 import 'package:notekeep/views/splash/splash_screen.dart';
 
 void main() {
@@ -15,6 +16,8 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         //home:  splash_screen(),
         //home:  home_screen(),
-        home: mainlog());
+     // home:  profile(),
+        home: mainlog()
+    );
   }
 }

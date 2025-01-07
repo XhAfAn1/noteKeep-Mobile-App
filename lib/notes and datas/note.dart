@@ -3,5 +3,6 @@
 class note{
   final title;
   final description;
-  note({this.title, this.description});
+  final date;
+  note({this.date,this.title, this.description});
 }

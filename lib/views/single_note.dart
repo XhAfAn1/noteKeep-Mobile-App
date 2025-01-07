@@ -3,21 +3,42 @@ import 'package:notekeep/notes%20and%20datas/note.dart';
 import 'package:notekeep/notes%20and%20datas/noteDatas.dart';
 import 'package:notekeep/views/home_screen.dart';
 
-class create_note extends StatelessWidget {
+class create_note extends StatefulWidget {
   final titleName;
   final descriptionData;
   final index;
-  const create_note(this.titleName, this.descriptionData,this.index,{super.key, });
+  final Edate;
 
+  create_note(this.titleName, this.descriptionData,this.index,this.Edate,{super.key, });
 
   @override
+  State<create_note> createState() => _create_noteState();
+}
+
+class _create_noteState extends State<create_note> {
+  TextEditingController title= TextEditingController(
+
+  );
+
+  TextEditingController noteData= TextEditingController(
+
+  );
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    title.text=widget.titleName;
+    noteData.text=widget.descriptionData;
+  }
+  @override
   Widget build(BuildContext context) {
-    TextEditingController title= TextEditingController(
-      text: titleName
-    );
-    TextEditingController noteData= TextEditingController(
-      text: descriptionData
-    );
+    double height = MediaQuery.of(context).size.height;
+    final isKeyboard =MediaQuery.of(context).viewInsets.bottom !=0;
+    int h1=(height/150).toInt();
+    int h2=(height/70).toInt();
+
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -25,8 +46,8 @@ class create_note extends StatelessWidget {
         leading: IconButton(
           onPressed: () {
 
-            if(index!=-1) noteobj.removeAt(index);
-            noteobj.add(note(title: title.text,description: noteData.text));
+            if(widget.index!=-1) noteobj.removeAt(widget.index);
+            noteobj.add(note(title: title.text,description: noteData.text,date: DateTime.now()));
 
             Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => const home_screen(),
@@ -89,7 +110,7 @@ class create_note extends StatelessWidget {
                 child: TextField(
                   controller: title,
                   minLines: 1,
-                  maxLines: 10,
+                  maxLines: 2,
                   style: const TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.w400,
@@ -110,7 +131,8 @@ class create_note extends StatelessWidget {
                 margin: const EdgeInsets.only(left: 20),
                 child: TextField(
                   controller: noteData,
-                  maxLines: 10,
+
+                  maxLines: isKeyboard ? h1 :h2,
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
@@ -166,7 +188,7 @@ class create_note extends StatelessWidget {
                       )
                     ],
                   ),
-                  const Text("Edited 5:01 pm",style: TextStyle(color: Color(0XFF676B70),fontSize: 15),),
+                   Text("Edited: ${widget.Edate.hour}:${widget.Edate.minute}",style: const TextStyle(color: Color(0XFF676B70),fontSize: 12),),
                   const SizedBox(
                     width: 10,
                   ),

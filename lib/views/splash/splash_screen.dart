@@ -40,33 +40,35 @@ class _splash_screenState extends State<splash_screen> {
       body:  PageView(
           controller: pages,
           children: [
-            Container(
+            ListView(
                 padding: const EdgeInsets.all(20),
-              child: Column(
+              children: [ Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const SizedBox(height: 50,),
-                  const Text("This is just a basic notepad app.\nFeatures:\n1.Create note\n2.Setup Profile\n3.long press delete note\n\n\nwill design this onboarding screen later",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w500),),
-                  const SizedBox(height: 50,),
+                  const SizedBox(height: 100,),
+                  const Text("This is just a basic notepad app.\nFeatures:\n1.Create note\n2.Setup Profile\n3.long press delete note\n4.single or grid view note\n\n\nwill design this onboarding screen later",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500),),
+                  const SizedBox(height: 200,),
                  Column(
                    children: [
                      SizedBox(
-                       width: double.infinity,
-                       height: 60,
-                       child: ElevatedButton(
-                         style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Colors.lightBlueAccent)),
-                         onPressed: (){
-                           pages.nextPage(duration: const Duration(microseconds: 800), curve:Curves.easeIn);
-                         }, child: const Text("Continue",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.black),),),
-                     ),
+                         width: double.infinity,
+                         height: 60,
+                         child: ElevatedButton(
+                           style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Colors.lightBlueAccent)),
+                           onPressed: (){
+                             pages.nextPage(duration: const Duration(microseconds: 800), curve:Curves.easeIn);
+                           }, child: const Text("Continue",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.black),),),
+                       ),
+
 
                      const SizedBox(height: 50,)
                    ],
                  )
                 ],
-              )
+              )]
             ),
-            Container(
+            SingleChildScrollView(
+              scrollDirection: Axis.vertical,
               padding: const EdgeInsets.all(20),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -104,7 +106,7 @@ class _splash_screenState extends State<splash_screen> {
                         )
                       ],
                     )
-                    ,const SizedBox(height: 50,),
+                    ,const SizedBox(height: 200,),
                     Column(
                       children: [
                         SizedBox(
@@ -130,13 +132,14 @@ class _splash_screenState extends State<splash_screen> {
                   ],
                 )
             ),
-            Container(
+            ListView(
               padding: const EdgeInsets.all(20),
-              child: Column(
+              children: [Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const SizedBox(height: 50,),
                   const Text("Welcome!",style: TextStyle(fontSize: 25,fontWeight: FontWeight.w500),),
+                  const SizedBox(height: 200,),
                   Column(
                     children: [
                       SizedBox(
@@ -154,7 +157,7 @@ class _splash_screenState extends State<splash_screen> {
                     ],
                   )
                 ],
-              ),
+              ),]
             ),
           ],
         ),

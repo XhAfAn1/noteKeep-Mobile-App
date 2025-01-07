@@ -23,7 +23,6 @@ class _home_screenState extends State<home_screen> {
   @override
   void initState() {
     super.initState();
-    getInstance();
     getImage();
   }
 
@@ -316,7 +315,7 @@ class _home_screenState extends State<home_screen> {
               onPressed: () {
                 //  Navigator.of(context).pop();
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const create_note("", "", -1),
+                  builder: (context) => create_note("", "", -1,DateTime.now()),
                 ));
               },
               child: Image.asset('assets/add_logo.PNG'),
@@ -472,7 +471,7 @@ class _home_screenState extends State<home_screen> {
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => create_note(
-                                data.title, data.description, index),
+                                data.title, data.description, index,DateTime.timestamp()),
                           ));
                         },
                         child: Container(
