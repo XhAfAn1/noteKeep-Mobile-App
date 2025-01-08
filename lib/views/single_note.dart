@@ -9,7 +9,7 @@ class create_note extends StatefulWidget {
   final index;
   final Edate;
 
-  create_note(this.titleName, this.descriptionData,this.index,this.Edate,{super.key, });
+  const create_note(this.titleName, this.descriptionData,this.index,this.Edate,{super.key, });
 
   @override
   State<create_note> createState() => _create_noteState();
