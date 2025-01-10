@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:notekeep/notes%20and%20datas/noteDatas.dart';
+import 'package:notekeep/notes%20and%20datas/note.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Userinfo.dart';
@@ -39,4 +41,17 @@ Future<File?> getUser() async {
 
   return null;
 
+}
+
+saveNotes() async{
+List<String> notesString=  noteobj.map((note)=>jsonEncode(note.toJson())).toList();
+sp?.setStringList('Allnotes', notesString);
+}
+
+readNotes() async{
+  var sharedPref = await SharedPreferences.getInstance();
+  List<String>? notesString= sharedPref.getStringList('Allnotes');
+  if(notesString!=null){
+    noteobj = notesString.map((notes) => note.fromJson(jsonDecode(notes))).toList();
+  }
 }
