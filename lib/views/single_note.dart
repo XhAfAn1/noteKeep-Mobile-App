@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notekeep/notes%20and%20datas/note.dart';
 import 'package:notekeep/notes%20and%20datas/noteDatas.dart';
+import 'package:notekeep/notes%20and%20datas/sharedPref/sharedPref.dart';
 import 'package:notekeep/views/home_screen.dart';
 
 class create_note extends StatefulWidget {
@@ -24,6 +25,7 @@ class _create_noteState extends State<create_note> {
 
   );
 
+
   @override
   void initState() {
     // TODO: implement initState
@@ -39,6 +41,7 @@ class _create_noteState extends State<create_note> {
     int h2=(height/70).toInt();
 
 
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -47,9 +50,13 @@ class _create_noteState extends State<create_note> {
           onPressed: () {
 
             if(widget.index!=-1) noteobj.removeAt(widget.index);
-            noteobj.add(note(title: title.text,description: noteData.text,date: DateTime.now()));
+            noteobj.add(note(title: title.text,description: noteData.text,date: "${DateTime.now().hour}:${DateTime.now().minute}"));
+            saveNotes();
+            setState(() {
 
+            });
             Navigator.of(context).push(MaterialPageRoute(
+              maintainState: true,
               builder: (context) => const home_screen(),
             ));
           },
@@ -188,7 +195,7 @@ class _create_noteState extends State<create_note> {
                       )
                     ],
                   ),
-                   Text("Edited: ${widget.Edate.hour}:${widget.Edate.minute}",style: const TextStyle(color: Color(0XFF676B70),fontSize: 12),),
+                   Text("Edited: ${widget.Edate}",style: const TextStyle(color: Color(0XFF676B70),fontSize: 12),),
                   const SizedBox(
                     width: 10,
                   ),

@@ -14,6 +14,7 @@ class splash_screen extends StatefulWidget {
 
 class _splash_screenState extends State<splash_screen> {
   File? image;
+  bool im=false;
   final picker = ImagePicker();
 
   Future getImage() async {
@@ -149,7 +150,9 @@ class _splash_screenState extends State<splash_screen> {
                           style: ButtonStyle(backgroundColor: WidgetStateProperty.all(Colors.lightBlueAccent)),
                           onPressed: (){
                             loggedin();
+                            if(userInfo['hasPhoto']!=false)
                             saveUser();
+                            saveUserName();
                             Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>const home_screen()));
                           }, child: const Text("Get Started",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20,color: Colors.black),),),
                       ),

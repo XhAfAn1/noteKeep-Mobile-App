@@ -18,13 +18,20 @@ loggedin() async {
 }
 
 saveUser() async {
-sp?.setString('username', userInfo['name']);
-
+  if(userInfo['name']!=null) {
+    sp?.setString('username', userInfo['name']);
+  }
+if(userInfo['profile']!=null || userInfo['profile']!='') {
   final bytes = await userInfo['profile'].readAsBytes();
   final base64String = base64Encode(bytes);
   sp?.setString('profiledp', base64String);
-sp?.setBool('hasimg', userInfo['hasPhoto']);
+  sp?.setBool('hasimg', userInfo['hasPhoto']);
 }
+}
+saveUserName() async {
+  sp?.setString('username', userInfo['name']);
+}
+
 
 Future<File?> getUser() async {
   var sharedPref = await SharedPreferences.getInstance();
@@ -54,4 +61,12 @@ readNotes() async{
   if(notesString!=null){
     noteobj = notesString.map((notes) => note.fromJson(jsonDecode(notes))).toList();
   }
+}
+resetAll() async{
+  sp?.clear();
+  sp?.remove('Allnotes');
+  var sharedPref = await SharedPreferences.getInstance();
+  sharedPref.remove('Allnotes');
+  noteobj.clear();
+  sharedPref.clear();
 }

@@ -23,28 +23,28 @@ class _home_screenState extends State<home_screen> {
   @override
   void initState() {
     super.initState();
+    readNotes();
     getImage();
   }
 
   File? image;
   @override
   Widget build(BuildContext context) {
-    setState(() {
-      getImage();
-    });
 
     return Scaffold(
+
       backgroundColor: Colors.white,
+
       bottomNavigationBar: BottomAppBar(
           color: Colors.white,
           height: 80,
           shadowColor: Colors.black,
           elevation: 10,
-          shape: const CircularNotchedRectangle(),
-          child: Row(
+         shape: const CircularNotchedRectangle(),
+         child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+           children: [
               IconButton(
                 icon: const Icon(
                   Icons.check_box_outlined,
@@ -74,8 +74,8 @@ class _home_screenState extends State<home_screen> {
                 ),
                 onPressed: () {},
               ),
-            ],
-          )),
+           ],
+         )),
       drawer: Drawer(
         shape: const LinearBorder(),
         width: 350,
@@ -315,7 +315,7 @@ class _home_screenState extends State<home_screen> {
               onPressed: () {
                 //  Navigator.of(context).pop();
                 Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => create_note("", "", -1,DateTime.now()),
+                  builder: (context) => create_note("", "", -1,"${DateTime.now().hour}:${DateTime.now().minute}"),
                 ));
               },
               child: Image.asset('assets/add_logo.PNG'),
@@ -455,23 +455,34 @@ class _home_screenState extends State<home_screen> {
                           showDialog(
                               context: context,
                               builder: (context) => AlertDialog(
+                                actionsPadding: EdgeInsets.all(10) ,
+                                titlePadding:EdgeInsets.all(30) ,
+
+                                backgroundColor: Colors.white,
+                                    title: Text("Delete this note?",style: TextStyle(color: Colors.black),),
                                     actions: [
-                                      const Text("Delete this note?"),
+                                      TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text("Cancel",style: TextStyle(color: Colors.black),))
+                                      ,
                                       TextButton(
                                           onPressed: () {
                                             setState(() {
                                               noteobj.removeAt(index);
+                                              saveNotes();
                                             });
                                             Navigator.pop(context);
                                           },
-                                          child: const Text("Delete"))
+                                          child: const Text("Delete",style: TextStyle(color: Colors.black),))
                                     ],
                                   ));
                         },
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => create_note(
-                                data.title, data.description, index,DateTime.timestamp()),
+                                data.title, data.description, index,data.date),
                           ));
                         },
                         child: Container(
@@ -529,7 +540,9 @@ class _home_screenState extends State<home_screen> {
   }
 
   Future<void> getImage() async {
+    if(image==null){
     image = await userInfo['profile'];
-    setState(() {}); // Ensure UI updates after the value is set.
+
+    setState(() {}); }// Ensure UI updates after the value is set.
   }
 }

@@ -1,5 +1,5 @@
 Map userInfo ={
-  'name':'User',
+  'name':'',
   'profile':'',
   'hasPhoto': false
 };
